@@ -47,25 +47,25 @@ class AuthController extends Controller
             'nama'     => 'required|string|max:100',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
-            'no_hp'    => 'required|string|max:20',
+            'no_telp'    => 'required|string|max:20',
             'alamat'   => 'required|string',
         ]);
 
         DB::transaction(function () use ($request) {
 
-            $peminjam = Peminjam::create([
-                'nama_peminjam' => $request->nama,
-                'email'         => $request->email,
-                'no_telp'         => $request->no_telp,
-                'alamat'        => $request->alamat,
+            $user = User::create([
+                'name'     => $request->nama,
+                'email'    => $request->email,
+                'password' => Hash::make($request->password),
+                'role'     => 'peminjam',
             ]);
 
-            User::create([
-                'name'        => $request->nama,
-                'email'       => $request->email,
-                'password'    => Hash::make($request->password),
-                'role'        => 'peminjam',
-                'id_peminjam' => $peminjam->id_peminjam,
+            Peminjam::create([
+                'user_id'        => $user->id_user,
+                'nama_peminjam'  => $request->nama,
+                'email'          => $request->email,
+                'no_telp'        => $request->no_telp,
+                'alamat'         => $request->alamat,
             ]);
         });
 

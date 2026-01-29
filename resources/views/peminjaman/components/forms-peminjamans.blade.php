@@ -37,18 +37,6 @@
                 @endforeach
             </select>
         </div>
-    @else
-        @if ($user->peminjam)
-            <input type="hidden" name="id_peminjam" value="{{ $user->peminjam->id_peminjam }}">
-        @else
-            <div class="p-3 rounded bg-red-100 text-red-700 text-sm">
-                Profil peminjam belum lengkap. Silakan lengkapi profil terlebih dahulu.
-            </div>
-        @endif
-
-        <div class="p-3 rounded-lg bg-gray-50 border text-sm text-gray-700">
-            <strong>Peminjam:</strong> {{ $user->nama }}
-        </div>
     @endif
 
 

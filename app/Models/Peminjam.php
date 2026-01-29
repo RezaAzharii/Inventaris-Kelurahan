@@ -12,6 +12,7 @@ class Peminjam extends Model
     protected $table = 'peminjams';
     protected $primaryKey = 'id_peminjam';
     protected $fillable = [
+        'user_id',
         'nik',
         'nama_peminjam',
         'no_telp',

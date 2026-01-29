@@ -26,9 +26,9 @@ class PeminjamController extends Controller
 
             $query->where(function ($q) use ($search) {
                 $q->where('id_peminjam', 'like', "%{$search}%")
-                  ->orWhere('nik', 'like', "%{$search}%")
-                  ->orWhere('nama_peminjam', 'like', "%{$search}%")
-                  ->orWhere('no_telp', 'like', "%{$search}%");
+                    ->orWhere('nik', 'like', "%{$search}%")
+                    ->orWhere('nama_peminjam', 'like', "%{$search}%")
+                    ->orWhere('no_telp', 'like', "%{$search}%");
             });
         }
         $peminjams = $query->paginate(10);
@@ -63,10 +63,10 @@ class PeminjamController extends Controller
     }
 
     public function edit($id)
-{
-    $peminjam = Peminjam::findOrFail($id);
-    return view('peminjam.edit', compact('peminjam'));
-}
+    {
+        $peminjam = Peminjam::findOrFail($id);
+        return view('peminjam.edit', compact('peminjam'));
+    }
 
 
     public function update(Request $request, $id)
@@ -86,9 +86,14 @@ class PeminjamController extends Controller
 
     public function destroy($id)
     {
-        Peminjam::findOrFail($id)->delete();
+        $peminjam = Peminjam::findOrFail($id);
+
+        if ($peminjam->user) {
+            $peminjam->user->delete();
+        }
+        $peminjam->delete();
 
         return redirect()->route('peminjam.index')
-            ->with('success', 'Data peminjam berhasil dihapus.');
+            ->with('success', 'Data peminjam dan user berhasil dihapus.');
     }
 }

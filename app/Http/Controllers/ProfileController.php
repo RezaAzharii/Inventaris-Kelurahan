@@ -13,7 +13,7 @@ class ProfileController extends Controller
 
         $peminjam = null;
         if ($user->role === 'isPeminjam') {
-            $peminjam = $user->peminjams;
+            $peminjam = $user->peminjam;
         }
 
         return view('profile.index', compact('user', 'peminjam'));
@@ -36,7 +36,7 @@ class ProfileController extends Controller
                 'alamat'  => 'required|max:255',
             ]);
 
-            $user->peminjams()->updateOrCreate(
+            $user->peminjam()->updateOrCreate(
                 ['user_id' => $user->id_user],
                 $validated
             );
