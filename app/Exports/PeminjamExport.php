@@ -43,6 +43,7 @@ class PeminjamExport implements
             $p->nik,
             $p->nama_peminjam,
             $p->no_telp,           // Tambahkan kolom no_telp
+            $p->alamat,
             $p->peminjamans_count,
         ];
     }
@@ -56,6 +57,7 @@ class PeminjamExport implements
             'NIK',
             'Nama Peminjam',
             'No. Telepon',          // Tambahkan heading
+            'Alamat',
             'Jumlah Peminjaman',
         ];
     }
@@ -73,13 +75,13 @@ class PeminjamExport implements
             BeforeSheet::class => function (BeforeSheet $event) {
 
                 $event->sheet->setCellValue('A1', 'DATA PEMINJAM ASET');
-                $event->sheet->mergeCells('A1:D1'); // Ubah menjadi D1 karena ada 4 kolom
+                $event->sheet->mergeCells('A1:E1'); // Ubah menjadi D1 karena ada 4 kolom
 
                 $event->sheet->setCellValue(
                     'A2',
                     'Diekspor pada: ' . now()->translatedFormat('d F Y')
                 );
-                $event->sheet->mergeCells('A2:D2'); // Ubah menjadi D2
+                $event->sheet->mergeCells('A2:E2'); // Ubah menjadi D2
 
                 $event->sheet->getStyle('A1')->applyFromArray([
                     'font' => [
@@ -114,7 +116,7 @@ class PeminjamExport implements
                 $lastRow = $sheet->getHighestRow();
 
                 // Border tabel
-                $sheet->getStyle("A3:D{$lastRow}")->applyFromArray([
+                $sheet->getStyle("A3:E{$lastRow}")->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
@@ -123,7 +125,7 @@ class PeminjamExport implements
                 ]);
 
                 // Heading bold
-                $sheet->getStyle('A3:D3')->applyFromArray([
+                $sheet->getStyle('A3:E3')->applyFromArray([
                     'font' => ['bold' => true],
                 ]);
 
@@ -134,9 +136,9 @@ class PeminjamExport implements
 
                 $sheet->mergeCells("A{$totalRow}:C{$totalRow}");
                 $sheet->setCellValue("A{$totalRow}", 'TOTAL SELURUH PEMINJAMAN');
-                $sheet->setCellValue("D{$totalRow}", $this->totalPeminjaman);
+                $sheet->setCellValue("E{$totalRow}", $this->totalPeminjaman);
 
-                $sheet->getStyle("A{$totalRow}:D{$totalRow}")->applyFromArray([
+                $sheet->getStyle("A{$totalRow}:E{$totalRow}")->applyFromArray([
                     'font' => ['bold' => true],
                     'borders' => [
                         'allBorders' => [
@@ -150,21 +152,21 @@ class PeminjamExport implements
                 // =============================
                 $row = $totalRow + 3;
 
-                $sheet->mergeCells("B{$row}:C{$row}");
-                $sheet->setCellValue("B{$row}", 'Mengetahui,');
+                $sheet->mergeCells("D{$row}:E{$row}");
+                $sheet->setCellValue("D{$row}", 'Mengetahui,');
 
                 $row++;
-                $sheet->mergeCells("B{$row}:C{$row}");
-                $sheet->setCellValue("B{$row}", 'Penanggung Jawab Aset');
+                $sheet->mergeCells("D{$row}:E{$row}");
+                $sheet->setCellValue("D{$row}", 'Penanggung Jawab Aset');
 
                 $row += 3;
-                $sheet->mergeCells("B{$row}:C{$row}");
-                $sheet->setCellValue("B{$row}", '( ____________________ )');
+                $sheet->mergeCells("D{$row}:E{$row}");
+                $sheet->setCellValue("D{$row}", '( ____________________ )');
 
                 $row++;
-                $sheet->mergeCells("B{$row}:C{$row}");
+                $sheet->mergeCells("D{$row}:E{$row}");
                 $sheet->setCellValue(
-                    "B{$row}",
+                    "D{$row}",
                     'Tanggal: ' . now()->translatedFormat('d F Y')
                 );
             },

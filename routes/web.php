@@ -24,6 +24,10 @@ Route::post('/password/reset', [AuthController::class, 'resetPassword'])->name('
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/peminjaman/export', [PeminjamanController::class, 'export'])->name('peminjaman.export');
+    Route::get('/peminjam/export', [PeminjamController::class, 'export'])->name('peminjam.export');
+    Route::get('/aset/export', [AsetController::class, 'export'])->name('aset.export');
+    
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -42,15 +46,16 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware(['auth', 'role:isAdmin'])->group(function () {
+    
+
     Route::post('/aset', [AsetController::class, 'store'])->name('aset.store');
     Route::get('/aset/{id_aset}/edit', [AsetController::class, 'edit'])->name('aset.edit');
     Route::put('/aset/{id_aset}', [AsetController::class, 'update'])->name('aset.update');
     Route::delete('/aset/{id_aset}', [AsetController::class, 'destroy'])->name('aset.destroy');
+
     Route::resource('peminjam', PeminjamController::class);
+
     Route::get('/peminjaman/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
     Route::put('/peminjaman/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
     Route::delete('/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
-    Route::get('/peminjaman/export', [PeminjamanController::class, 'export'])->name('peminjaman.export');
-    Route::get('/peminjam/export', [PeminjamController::class, 'export'])->name('peminjam.export');
-    Route::get('/aset/export', [AsetController::class, 'export'])->name('aset.export');
 });
