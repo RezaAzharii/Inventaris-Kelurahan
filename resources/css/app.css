@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Just+Me+Again+Down+Here&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap");
+@import "tailwindcss";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+/* 
+body {
+    overflow-x: hidden;
+}
+.sidebar {
+    background-color: #1e293b;
+    color: #fff;
+    width: 256px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.sidebar h4 {
+    font-weight: bold;
+    color: #f8fafc;
+    margin-bottom: 2rem;
+}
+
+.sidebar .nav-link {
+    color: #cbd5e1;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar .nav-link:hover {
+    color: #fff;
+    background-color: #334155;
+    border-radius: 5px;
+}
+
+.sidebar .nav-link.fw-bold {
+    color: #fff;
+    font-weight: bold;
+}
+
+.sidebar .collapse .nav-link {
+    padding-left: 1.5rem;
+}
+
+.sidebar .nav-item .bi-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.sidebar .nav-item .collapsed .bi-chevron-down {
+    transform: rotate(0deg);
+}
+
+.sidebar .nav-item[aria-expanded="true"] .bi-chevron-down {
+    transform: rotate(180deg);
+}
+
+.sidebar .nav-link.active {
+    background-color: #495057;
+    color: #ffffff !important;
+    border-radius: 5px;
+}
+
+.notransition {
+    transition: none !important;
+} */
